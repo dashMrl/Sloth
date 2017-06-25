@@ -2,7 +2,7 @@
 
 ![Sloth](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdSR5mlbRGEPwFDk38Tp19tGgXo1vrEB6L0JosG0HXnNl8cScPOQ)
 
-Runtime Permission library , it supply you a request chain like way to get permissions at runtime .
+Runtime Permission library , it supply you a chain-like way to get permissions at runtime .
 
 ## How to use
 
@@ -23,10 +23,10 @@ As you can see , we don't need to override the `onRequestPermissionsResult` meth
 
 There are some keys you should know :
 
-- the entire action won't trigger unless you call `commit` when finished the configuration
+- the entire action won't trigger unless you call `commit` when the configuration finished
 - when `afterDenied` is called , you lost your ability to continue configuring . Make sure call `afterDenied` at the end of configuration
 - the variable `requestAction` will request permissions directly if its `invoke` method is called
-- the variable `goSettingAction` will navigate you to the setting page of your app
+- the variable `goSettingAction` will navigate you to the setting page of your app when its `invoke` called
 
 
 
