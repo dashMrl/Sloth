@@ -61,27 +61,17 @@ public class Request {
             this.mPermissions = permissions;
         }
 
-        public RequestBuilder onRational(RationaleCallback rationalCallback) {
-            checkUsed(isUsed);
-            mRationaleCallback = rationalCallback;
-            return this;
-        }
-
-        public RequestBuilder afterGranted(OnGrantedCallback grantedCallback) {
-            checkUsed(isUsed);
-            this.mGrantedCallback = grantedCallback;
-            return this;
-        }
-
         public RequestBuilder requestCode(int requestCode) {
             checkUsed(isUsed);
             this.mRequestCode = requestCode;
             return this;
         }
 
-        public Request afterDenied(OnDeniedCallback deniedCallback) {
-            this.mDeniedCallback = deniedCallback;
+        public Request callback(RationaleCallback rationaleCallback, OnGrantedCallback onGrantedCallback, OnDeniedCallback deniedCallback) {
             isUsed = true;
+            this.mRationaleCallback=rationaleCallback;
+            this.mGrantedCallback=onGrantedCallback;
+            this.mDeniedCallback = deniedCallback;
             return new Request(mPermissions, mGrantedCallback, mDeniedCallback, mRationaleCallback, mRequestCode);
         }
 
