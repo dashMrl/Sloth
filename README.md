@@ -19,6 +19,20 @@ Sloth
             Toast.makeText(this, "denied", Toast.LENGTH_SHORT).show())
   .commit(activity);
 ```
+or
+```kotlin
+Sloth
+	.request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_CONTACTS)
+	.requestCode(2333)
+	.callback(
+      	{permissions, requestAction ->
+            Toast.makeText(this, "show rationale", Toast.LENGTH_SHORT).show() },
+        {requestCode, grantedPermissions ->
+            Toast.makeText(this, "granted", Toast.LENGTH_SHORT).show()},
+        {requestCode, DeniedPermissions, goSettingAction ->
+            Toast.makeText(this, "denied", Toast.LENGTH_SHORT).show()})
+  	.commit(activity);
+```
 
 As you can see , we don't need to override the `onRequestPermissionsResult` method in fragment or activity , so we can complete our request process in a more fluent way and improve the code's readability .
 
@@ -34,7 +48,9 @@ There are some keys you should know :
 ## How to integrate
 
 ```groovy
-compile 'com.xiansenliu.sloth:sloth:latestVersion'
+compile 'com.xiansenliu.sloth:sloth:1.0.1'
+```
 or
-implementation 'com.xiansenliu.sloth:sloth:lastestVersionn'
+```groovy
+implementation 'com.xiansenliu.sloth:sloth:1.0.1'
 ```
