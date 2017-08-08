@@ -2,7 +2,7 @@
 
 ![Sloth](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdSR5mlbRGEPwFDk38Tp19tGgXo1vrEB6L0JosG0HXnNl8cScPOQ)
 
-Runtime Permission library , it supply you a chain-like way to get permissions at runtime .
+Runtime Permission library
 
 ## How to use
 
@@ -36,12 +36,7 @@ Sloth
 
 As you can see , we don't need to override the `onRequestPermissionsResult` method in fragment or activity , so we can complete our request process in a more fluent way and improve the code's readability .
 
-There are some keys you should know :
-
-- the entire action won't trigger unless you call `commit` when the configuration finished
-- when `afterDenied` is called , you lost your ability to continue configuring . Make sure call `afterDenied` at the end of configuration
-- the variable `requestAction` will request permissions directly if its `invoke` method is called
-- the variable `goSettingAction` will navigate you to the setting page of your app when its `invoke` called
+And the entire action won't trigger unless you call `commit` when the configuration finished
 
 
 
