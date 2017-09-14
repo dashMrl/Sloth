@@ -7,7 +7,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-alpha8'
+        classpath 'com.android.tools.build:gradle:3.0.0-beta5'
         
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -32,7 +32,7 @@ task clean(type: Delete) {
 ext {
 //  SDK and Tools
     compileSdkVersion = 26
-    buildToolsVersion = '26.0.0'
+    buildToolsVersion = '26.0.1'
     minSdkVersion = 19
     targetSdkVersion = 26
     versionCode = 1
@@ -40,7 +40,7 @@ ext {
     targetCompatibilityVersion = JavaVersion.VERSION_1_8
     sourceCompatibilityVersion = JavaVersion.VERSION_1_8
 }
-def supportLibraryVersion = '26.0.0-beta2'
+def supportLibraryVersion = '26.0.2'
 ext.deps = [
 //      Android Support
 appcompat_v7: "com.android.support:appcompat-v7:$supportLibraryVersion",
