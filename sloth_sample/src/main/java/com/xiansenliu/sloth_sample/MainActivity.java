@@ -2,14 +2,17 @@ package com.xiansenliu.sloth_sample;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.xiansenliu.sloth.PuppetFragment;
 import com.xiansenliu.sloth.Sloth;
 
 public class MainActivity extends AppCompatActivity {
@@ -54,6 +57,16 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PuppetFragment.GO_SETTING_CODE) {
+            Log.d(TAG, "onActivityResult: back from settings");
+        }
+    }
+
+    private static final String TAG = "MainActivity";
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

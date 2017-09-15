@@ -17,7 +17,7 @@ import java.util.List;
  */
 
 public final class PuppetFragment extends Fragment {
-
+    public static final int GO_SETTING_CODE = 9999;
     private Request mRequest;
 
     @SuppressLint("NewApi")
@@ -68,7 +68,8 @@ public final class PuppetFragment extends Fragment {
 
     private void onAnyPermissionDenied(int requestCode, List<String> permissions) {
         if (mRequest.getDeniedCallback() == null) return;
-        mRequest.getDeniedCallback().onDenied(requestCode, permissions, () -> getActivity().startActivity(Utils.createSettingIntent(getActivity())));
+        mRequest.getDeniedCallback().onDenied(requestCode, permissions, () ->
+                getActivity().startActivityForResult(Utils.createSettingIntent(getActivity()), GO_SETTING_CODE));
     }
 
     private void setRequest(Request request) {
