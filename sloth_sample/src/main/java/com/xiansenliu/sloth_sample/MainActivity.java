@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PuppetFragment.GO_SETTING_CODE) {
-            Log.d(TAG, "onActivityResult: back from settings");
+        if (requestCode == 2333) {
+            Log.d(TAG, "onActivityResult: back from settings，Request Code = " + requestCode);
         }
     }
 

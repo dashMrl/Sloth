@@ -17,11 +17,10 @@ import java.util.List;
  */
 
 public final class PuppetFragment extends Fragment {
-    public static final int GO_SETTING_CODE = 9999;
     private Request mRequest;
 
     @SuppressLint("NewApi")
-    public void request(Request request) {
+    protected void request(Request request) {
         setRequest(request);
         String[] permissions = mRequest.getPermissions();
         int requestCode = mRequest.getRequestCode();
@@ -34,7 +33,8 @@ public final class PuppetFragment extends Fragment {
 
         List<String> unGrantedPermissions = Utils.shouldShowRationale(this, permissions);
         if (unGrantedPermissions.size() > 0 && mRequest.getRationalCallback() != null) {
-            mRequest.getRationalCallback().showRational(unGrantedPermissions, () -> requestPermissions(permissions, requestCode));
+            mRequest.getRationalCallback().showRational(unGrantedPermissions,
+                    () -> requestPermissions(permissions, requestCode));
         } else {
             requestPermissions(permissions, requestCode);
         }
@@ -69,7 +69,7 @@ public final class PuppetFragment extends Fragment {
     private void onAnyPermissionDenied(int requestCode, List<String> permissions) {
         if (mRequest.getDeniedCallback() == null) return;
         mRequest.getDeniedCallback().onDenied(requestCode, permissions, () ->
-                getActivity().startActivityForResult(Utils.createSettingIntent(getActivity()), GO_SETTING_CODE));
+                getActivity().startActivityForResult(Utils.createSettingIntent(getActivity()), requestCode));
     }
 
     private void setRequest(Request request) {
