@@ -6,15 +6,15 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion rootProject.android.compileSdkVersion
+    buildToolsVersion rootProject.android.buildToolsVersion
 
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.versionCode
-        versionName rootProject.versionName
+        minSdkVersion rootProject.android.minSdkVersion
+        targetSdkVersion rootProject.android.targetSdkVersion
+        versionCode rootProject.android.versionCode
+        versionName rootProject.android.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -26,8 +26,8 @@ android {
         }
     }
     compileOptions {
-        targetCompatibility rootProject.ext.sourceCompatibilityVersion
-        sourceCompatibility rootProject.ext.targetCompatibilityVersion
+        targetCompatibility rootProject.android.sourceCompatibilityVersion
+        sourceCompatibility rootProject.android.targetCompatibilityVersion
     }
 }
 
@@ -44,7 +44,7 @@ dependencies {
 /*
 * 2 definite the POM information
 * */
-version = rootProject.ext.versionName
+version = rootProject.android.versionName
 group = "com.xiansenliu.sloth"
 
 def siteUrl = 'https://github.com/xiansenLiu/Sloth'
@@ -132,7 +132,7 @@ bintray {
         version {
             name = group
             released = new Date()
-            vcsTag = rootProject.ext.versionName
+            vcsTag = rootProject.android.versionName
         }
     }
 }
