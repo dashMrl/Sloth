@@ -1,4 +1,8 @@
 apply plugin: 'com.android.library'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
 /*
 * 1 apply must have plugins
 * */
@@ -18,6 +22,11 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+    }
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/kotlin']
+        }
     }
     buildTypes {
         release {
