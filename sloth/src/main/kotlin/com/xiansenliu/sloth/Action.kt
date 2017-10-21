@@ -1,4 +1,4 @@
-package com.xiansenliu.sloth;
+package com.xiansenliu.sloth
 
 /**
  * Author       xinliu
@@ -6,6 +6,6 @@ package com.xiansenliu.sloth;
  * Time         2:15 AM
  */
 
-public interface Action {
-    void invoke();
+interface Action {
+    fun invoke()
 }
