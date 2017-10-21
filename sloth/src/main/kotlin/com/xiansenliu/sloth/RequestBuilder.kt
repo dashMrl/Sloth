@@ -47,8 +47,8 @@ class RequestBuilder(internal val act: Activity) {
     }
 
     companion object {
-        val DEFAULT_ON_GRANTED: OnGrantedCallback = OnGrantedCallback { requestCode, grantedPermissions -> }
-        val DEFAULT_ON_RATIONALE: RationaleCallback = RationaleCallback { permissions, requestAction -> requestAction.invoke() }
-        val DEFAULT_ON_DENIED: OnDeniedCallback = OnDeniedCallback { requestCode, deniedPermissions, goSettingAction -> }
+        val DEFAULT_ON_GRANTED: OnGrantedCallback = OnGrantedCallback { _, _ -> }
+        val DEFAULT_ON_RATIONALE: RationaleCallback = RationaleCallback { _, requestAction -> requestAction.invoke() }
+        val DEFAULT_ON_DENIED: OnDeniedCallback = OnDeniedCallback { _, _, _ -> }
     }
 }
