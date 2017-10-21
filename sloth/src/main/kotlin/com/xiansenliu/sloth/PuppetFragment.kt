@@ -4,9 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Fragment
 import android.content.pm.PackageManager
-
-import java.util.ArrayList
-import java.util.Arrays
+import java.util.*
 
 /**
  * Author       xinliu
@@ -25,13 +23,13 @@ class PuppetFragment : Fragment() {
         val permissions = mRequest.permissions
         val requestCode = mRequest.requestCode
 
-        val granted = Utils.arePermissionsGranted(activity, permissions)
+        val granted = arePermissionsGranted(activity, permissions)
         if (granted) {
             onAllPermissionsGranted(requestCode, permissions)
             return
         }
 
-        val unGrantedPermissions = Utils.shouldShowRationale(this, permissions)
+        val unGrantedPermissions = shouldShowRationale(this, permissions)
         if (unGrantedPermissions.isNotEmpty()) {
             mRequest.onRational.showRationale(unGrantedPermissions) { requestPermissions(permissions.toTypedArray(), requestCode) }
         } else {
@@ -63,7 +61,7 @@ class PuppetFragment : Fragment() {
     }
 
     private fun onAnyPermissionDenied(requestCode: Int, permissions: List<String>) {
-        mRequest.onDenied.onDenied(requestCode, permissions) { activity.startActivityForResult(Utils.createSettingIntent(activity), requestCode) }
+        mRequest.onDenied.onDenied(requestCode, permissions) { activity.startActivityForResult(createSettingIntent(activity), requestCode) }
     }
 
     private fun setRequest(request: Request) {
@@ -73,8 +71,7 @@ class PuppetFragment : Fragment() {
     companion object {
         private val TAG = PuppetFragment::class.java.canonicalName
         fun create(act: Activity): PuppetFragment {
-            var puppetFragment: PuppetFragment? = act.fragmentManager.findFragmentByTag(TAG) as PuppetFragment
-            act.fragmentManager.findFragmentByTag(TAG)
+            var puppetFragment: PuppetFragment? = act.fragmentManager.findFragmentByTag(TAG) as PuppetFragment?
             if (puppetFragment == null) {
                 puppetFragment = PuppetFragment()
                 act.fragmentManager.beginTransaction()
