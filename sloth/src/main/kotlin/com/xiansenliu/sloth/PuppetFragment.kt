@@ -33,11 +33,7 @@ class PuppetFragment : Fragment() {
 
         val unGrantedPermissions = Utils.shouldShowRationale(this, permissions)
         if (unGrantedPermissions.isNotEmpty()) {
-            mRequest.onRational.showRationale(unGrantedPermissions, object : Action {
-                override fun invoke() {
-                    requestPermissions(permissions.toTypedArray(), requestCode)
-                }
-            })
+            mRequest.onRational.showRationale(unGrantedPermissions) { requestPermissions(permissions.toTypedArray(), requestCode) }
         } else {
             requestPermissions(permissions.toTypedArray(), requestCode)
         }
@@ -67,11 +63,7 @@ class PuppetFragment : Fragment() {
     }
 
     private fun onAnyPermissionDenied(requestCode: Int, permissions: List<String>) {
-        mRequest.onDenied.onDenied(requestCode, permissions, object : Action {
-            override fun invoke() {
-                activity.startActivityForResult(Utils.createSettingIntent(activity), requestCode)
-            }
-        })
+        mRequest.onDenied.onDenied(requestCode, permissions) { activity.startActivityForResult(Utils.createSettingIntent(activity), requestCode) }
     }
 
     private fun setRequest(request: Request) {

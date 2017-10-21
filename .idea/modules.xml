@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Sloth.iml" filepath="$PROJECT_DIR$/Sloth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Sloth.iml" filepath="$PROJECT_DIR$/Sloth.iml" />
       <module fileurl="file://$PROJECT_DIR$/sloth/sloth.iml" filepath="$PROJECT_DIR$/sloth/sloth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sloth/sloth.iml" filepath="$PROJECT_DIR$/sloth/sloth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sloth_sample/sloth_sample.iml" filepath="$PROJECT_DIR$/sloth_sample/sloth_sample.iml" />
       <module fileurl="file://$PROJECT_DIR$/sloth_sample/sloth_sample.iml" filepath="$PROJECT_DIR$/sloth_sample/sloth_sample.iml" />
     </modules>
   </component>

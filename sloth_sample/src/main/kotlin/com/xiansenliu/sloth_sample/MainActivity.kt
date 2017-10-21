@@ -12,6 +12,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.xiansenliu.sloth.Action
+import com.xiansenliu.sloth.OnDeniedCallback
+import com.xiansenliu.sloth.OnGrantedCallback
 
 import com.xiansenliu.sloth.PuppetFragment
 import com.xiansenliu.sloth.RationaleCallback
@@ -31,26 +33,25 @@ class MainActivity : AppCompatActivity() {
                     .code(2333)
                     .request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_CONTACTS)
                     .callback(
-//                            { permissions:List<String>, requestAction:Action ->
-//                                Toast.makeText(this, "show rationale", Toast.LENGTH_SHORT).show()
-//                                AlertDialog.Builder(this@MainActivity)
-//                                        .setTitle("The reason for permissions")
-//                                        .setMessage("need some permissions to ensure that the app will run properly")
-//                                        .setPositiveButton("OK") { dialogInterface, i -> requestAction.invoke() }
-//                                        .show()
-//                            },
-//                            { requestCode, permissions ->
-//                                Toast.makeText(this, "granted", Toast.LENGTH_SHORT).show()
-//                            },
-//                            { requestCode, permissions, goSettingAction ->
-//                                Toast.makeText(this, "denied", Toast.LENGTH_SHORT).show()
-//                                AlertDialog.Builder(this@MainActivity)
-//                                        .setTitle("Request was denied")
-//                                        .setMessage("go to the app detail page and grant the permissions manually")
-//                                        .setPositiveButton("Go") { dialogInterface, i -> goSettingAction.invoke() }
-//                                        .show()
-//                            }
-                    )
+                            RationaleCallback { permissions, requestAction ->
+                                Toast.makeText(this, "show rationale", Toast.LENGTH_SHORT).show()
+                                AlertDialog.Builder(this@MainActivity)
+                                        .setTitle("The reason for permissions")
+                                        .setMessage("need some permissions to ensure that the app will run properly")
+                                        .setPositiveButton("OK") { dialogInterface, i -> requestAction.invoke() }
+                                        .show()
+                            },
+                            OnGrantedCallback { requestCode, grantedPermissions ->
+                                Toast.makeText(this, "granted", Toast.LENGTH_SHORT).show()
+                            },
+                            OnDeniedCallback { requestCode, deniedPermissions, goSettingAction ->
+                                Toast.makeText(this, "denied", Toast.LENGTH_SHORT).show()
+                                AlertDialog.Builder(this@MainActivity)
+                                        .setTitle("Request was denied")
+                                        .setMessage("go to the app detail page and grant the permissions manually")
+                                        .setPositiveButton("Go") { dialogInterface, i -> goSettingAction.invoke() }
+                                        .show()
+                            })
                     .commit()
         }
     }
