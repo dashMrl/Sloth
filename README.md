@@ -1,4 +1,5 @@
 # Sloth
+[![](https://jitpack.io/v/xiansenLiu/Sloth.svg)](https://jitpack.io/#xiansenLiu/Sloth)
 
 ![Sloth](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdSR5mlbRGEPwFDk38Tp19tGgXo1vrEB6L0JosG0HXnNl8cScPOQ)
 
@@ -35,9 +36,23 @@ Sloth.with(this)
 
 
 ## How to integrate
+- Step 1. Add the JitPack repository to your build file
+Add it in your root build.gradle at the end of repositories:
 ```groovy
-implementation "com.github.xiansenLiu:Sloth:v1.0.4"
+allprojects {
+    repositories {
+        //...
+        maven { url 'https://jitpack.io' }
+    }
+}
 ```
+- Step 2. Add the dependency
+```groovy
+dependencies{
+    implementation "com.github.xiansenLiu:Sloth:v1.0.4"
+}
+```
+
 
 ## License 
 
