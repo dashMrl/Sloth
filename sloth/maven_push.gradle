@@ -1,106 +1,26 @@
-/*
-* 1 apply must have plugins
-* */
-apply plugin: 'com.jfrog.bintray'
 apply plugin: 'com.github.dcendents.android-maven'
 
-/*
-* 2 definite the POM information
-* */
 version = rootProject.android.versionName
-group = "com.xiansenliu.sloth"
+group = "com.github.xiansenLiu"
 
-def siteUrl = 'https://github.com/xiansenLiu/Sloth'
-def gitUrl = 'https://github.com/xiansenLiu/BaseSloth.git'
-
-// solution for javadoc error with kotlin
-tasks.withType(Javadoc).all {
-    enabled = false
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
 }
-
-/*
-* 3 add jar-generating task
-* */
-task generateSourcesJar(type: Jar) {
+task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
-    classifier 'sources'
+    classifier = 'sources'
 }
-
-/*
-* 4 add javadoc-generating task
-* */
-task generateJavadocs(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
+task javadoc(type: Javadoc) {
+    failOnError false
+    source = android.sourceSets.main.java.sourceFiles
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.compile
 }
-
-/*
-* 5 add javadocJar-generating task
-* */
-task generateJavadocsJar(type: Jar, dependsOn: generateJavadocs) {
-    from generateJavadocs.destinationDir
-    classifier 'javadoc'
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
 }
-
-
 artifacts {
-    archives generateJavadocsJar
-    archives generateSourcesJar
-}
-
-
-
-install {
-    repositories.mavenInstaller {
-        // This generates POM.xml with proper parameters
-        pom {
-            project {
-                packaging 'aar'
-                // Add your description here
-                name 'Runtime Permission library'    //项目描述
-                url siteUrl
-                // Set your license
-                licenses {
-                    license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id 'xiansenLiu'        //填写的一些基本信息
-                        name 'xiansenLiu'
-                        email '614626892@qq.com'
-                    }
-                }
-                scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
-                }
-            }
-        }
-    }
-}
-
-
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.apikey")
-    configurations = ['archives']
-    pkg {
-        repo = "maven"
-        name = "com.xiansenliu.sloth"    //name of JCenter's project
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = ["Apache-2.0"]
-        publish = true
-        version {
-            name = group
-            released = new Date()
-            vcsTag = rootProject.android.versionName
-        }
-    }
+    archives sourcesJar
+    archives javadocJar
 }

@@ -1,4 +1,4 @@
-def kotlin_version = '1.1.51'
+def kotlin_version = '1.2.0'
 def anko_version = '0.10.1'
 def support_lib_version = '26.1.0'
 ext {
