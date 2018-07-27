@@ -1,4 +1,4 @@
-package com.xiansenliu.sloth_sample;
+package com.dashmrl.sloth;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.xiansenliu.sloth_sample", appContext.getPackageName());
+        assertEquals("com.xiansenliu.sloth.test", appContext.getPackageName());
     }
 }

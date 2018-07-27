@@ -1,13 +1,13 @@
-package com.xiansenliu.sloth
+package com.dashmrl.sloth
 
-import android.app.Activity
+import android.support.v4.app.FragmentActivity
 
 /**
  * Author       xinliu
  * Date         10/21/17
  * Time         9:07 PM
  */
-class RequestBuilder(internal val act: Activity) {
+class RequestBuilder(internal val act: FragmentActivity) {
     private var callbackSet = false
     internal val permissions = mutableListOf<String>()
     internal lateinit var onGranted: OnGrantedCallback
@@ -47,8 +47,8 @@ class RequestBuilder(internal val act: Activity) {
     }
 
     companion object {
-        val DEFAULT_ON_GRANTED: OnGrantedCallback = OnGrantedCallback { _, _ -> }
-        val DEFAULT_ON_RATIONALE: RationaleCallback = RationaleCallback { _, requestAction -> requestAction.invoke() }
-        val DEFAULT_ON_DENIED: OnDeniedCallback = OnDeniedCallback { _, _, _ -> }
+        val DEFAULT_ON_GRANTED: OnGrantedCallback = { _, _ -> }
+        val DEFAULT_ON_RATIONALE: RationaleCallback = { _, requestAction -> requestAction.invoke() }
+        val DEFAULT_ON_DENIED: OnDeniedCallback = { _, _, _ -> }
     }
 }

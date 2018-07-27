@@ -1,4 +1,4 @@
-package com.xiansenliu.sloth_sample
+package com.dashmrl.sloth_sample
 
 import android.Manifest
 import android.app.AlertDialog
@@ -8,16 +8,8 @@ import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Toast
-import com.xiansenliu.sloth.Action
-import com.xiansenliu.sloth.OnDeniedCallback
-import com.xiansenliu.sloth.OnGrantedCallback
-
-import com.xiansenliu.sloth.PuppetFragment
-import com.xiansenliu.sloth.RationaleCallback
-import com.xiansenliu.sloth.Sloth
+import com.dashmrl.sloth.Sloth
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,12 +20,12 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
-        fab.setOnClickListener { v ->
+        fab.setOnClickListener {
             Sloth.with(this)
                     .code(2333)
                     .request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_CONTACTS)
                     .callback(
-                            RationaleCallback { permissions, requestAction ->
+                            { permissions, requestAction ->
                                 Toast.makeText(this, "show rationale", Toast.LENGTH_SHORT).show()
                                 AlertDialog.Builder(this@MainActivity)
                                         .setTitle("The reason for permissions")
@@ -41,10 +33,10 @@ class MainActivity : AppCompatActivity() {
                                         .setPositiveButton("OK") { dialogInterface, i -> requestAction.invoke() }
                                         .show()
                             },
-                            OnGrantedCallback { requestCode, grantedPermissions ->
+                            { requestCode, grantedPermissions ->
                                 Toast.makeText(this, "granted", Toast.LENGTH_SHORT).show()
                             },
-                            OnDeniedCallback { requestCode, deniedPermissions, goSettingAction ->
+                            { requestCode, deniedPermissions, goSettingAction ->
                                 Toast.makeText(this, "denied", Toast.LENGTH_SHORT).show()
                                 AlertDialog.Builder(this@MainActivity)
                                         .setTitle("Request was denied")

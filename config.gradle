@@ -1,21 +1,19 @@
-def kotlin_version = '1.2.0'
-def anko_version = '0.10.1'
-def support_lib_version = '26.1.0'
+def kotlin_version = '1.2.50'
+def support_lib_version = '27.1.1'
 ext {
     android = [
 
-            compileSdkVersion         : 26,
-            buildToolsVersion         : '26.0.2',
+            compileSdkVersion         : 28,
+            buildToolsVersion         : '28.0.1',
             minSdkVersion             : 19,
-            targetSdkVersion          : 26,
+            targetSdkVersion          : 28,
             versionCode               : 1,
-            versionName               : '1.0.3',
+            versionName               : '1.0.5',
             targetCompatibilityVersion: JavaVersion.VERSION_1_8,
             sourceCompatibilityVersion: JavaVersion.VERSION_1_8
     ]
     deps = [
-            kotlin      : "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version",
-            anko_commons: "org.jetbrains.anko:anko-commons:$anko_version",
+            kotlin      : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version",
 
             appcompat_v7: "com.android.support:appcompat-v7:$support_lib_version",
             design      : "com.android.support:design:$support_lib_version",

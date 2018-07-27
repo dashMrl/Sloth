@@ -1,9 +1,9 @@
-package com.xiansenliu.sloth
+package com.dashmrl.sloth
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.Fragment
 import android.content.pm.PackageManager
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
 import java.util.*
 
 /**
@@ -23,7 +23,7 @@ class PuppetFragment : Fragment() {
         val permissions = mRequest.permissions
         val requestCode = mRequest.requestCode
 
-        val granted = arePermissionsGranted(activity, permissions)
+        val granted = arePermissionsGranted(requireActivity(), permissions)
         if (granted) {
             onAllPermissionsGranted(requestCode, permissions)
             return
@@ -31,7 +31,7 @@ class PuppetFragment : Fragment() {
 
         val unGrantedPermissions = shouldShowRationale(this, permissions)
         if (unGrantedPermissions.isNotEmpty()) {
-            mRequest.onRational.showRationale(unGrantedPermissions) { requestPermissions(permissions.toTypedArray(), requestCode) }
+            mRequest.onRational(unGrantedPermissions) { requestPermissions(permissions.toTypedArray(), requestCode) }
         } else {
             requestPermissions(permissions.toTypedArray(), requestCode)
         }
@@ -57,11 +57,11 @@ class PuppetFragment : Fragment() {
     }
 
     private fun onAllPermissionsGranted(requestCode: Int, permissions: List<String>) {
-        mRequest.onGranted.onGranted(requestCode, permissions)
+        mRequest.onGranted(requestCode, permissions)
     }
 
     private fun onAnyPermissionDenied(requestCode: Int, permissions: List<String>) {
-        mRequest.onDenied.onDenied(requestCode, permissions) { activity.startActivityForResult(createSettingIntent(activity), requestCode) }
+        mRequest.onDenied(requestCode, permissions) { requireActivity().startActivityForResult(createSettingIntent(requireContext()), requestCode) }
     }
 
     private fun setRequest(request: Request) {
@@ -70,14 +70,15 @@ class PuppetFragment : Fragment() {
 
     companion object {
         private val TAG = PuppetFragment::class.java.canonicalName
-        fun create(act: Activity): PuppetFragment {
-            var puppetFragment: PuppetFragment? = act.fragmentManager.findFragmentByTag(TAG) as PuppetFragment?
+        fun create(act: FragmentActivity): PuppetFragment {
+            val sfm = act.supportFragmentManager
+            var puppetFragment: PuppetFragment? = sfm.findFragmentByTag(TAG) as PuppetFragment?
             if (puppetFragment == null) {
                 puppetFragment = PuppetFragment()
-                act.fragmentManager.beginTransaction()
+                sfm.beginTransaction()
                         .add(puppetFragment, TAG)
                         .commitAllowingStateLoss()
-                act.fragmentManager.executePendingTransactions()
+                sfm.executePendingTransactions()
             }
             return puppetFragment
         }

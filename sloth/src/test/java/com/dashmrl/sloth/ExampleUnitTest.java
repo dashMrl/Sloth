@@ -1,4 +1,4 @@
-package com.xiansenliu.sloth;
+package com.dashmrl.sloth;
 
 import org.junit.Test;
 

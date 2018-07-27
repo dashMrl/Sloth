@@ -3,7 +3,7 @@
 
 ![Sloth](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdSR5mlbRGEPwFDk38Tp19tGgXo1vrEB6L0JosG0HXnNl8cScPOQ)
 
-a simple Runtime Permission library helps you requesting permissions in a **fluent/chain-like** way.
+a simple Runtime Permission library helps you requesting permissions in a **cascade** way.
 
 
 ## How to use (in Kotlin)
@@ -12,7 +12,7 @@ Sloth.with(this)
         .code(2333)
         .request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_CONTACTS)
         .callback(
-                RationaleCallback { permissions, requestAction ->
+                { permissions, requestAction ->
                     Toast.makeText(this, "show rationale", Toast.LENGTH_SHORT).show()
                     AlertDialog.Builder(this@MainActivity)
                             .setTitle("The reason for permissions")
@@ -20,10 +20,10 @@ Sloth.with(this)
                             .setPositiveButton("OK") { dialogInterface, i -> requestAction.invoke() }
                             .show()
                 },
-                OnGrantedCallback { requestCode, grantedPermissions ->
+                { requestCode, grantedPermissions ->
                     Toast.makeText(this, "granted", Toast.LENGTH_SHORT).show()
                 },
-                OnDeniedCallback { requestCode, deniedPermissions, goSettingAction ->
+                { requestCode, deniedPermissions, goSettingAction ->
                     Toast.makeText(this, "denied", Toast.LENGTH_SHORT).show()
                     AlertDialog.Builder(this@MainActivity)
                             .setTitle("Request was denied")
@@ -48,7 +48,7 @@ allprojects {
 - Step 2. Add the dependency
 ```groovy
 dependencies{
-    implementation "com.github.xiansenLiu:Sloth:v1.0.4"
+    implementation "com.github.dashMrl:Sloth:v1.0.5"
 }
 ```
 
@@ -59,7 +59,7 @@ dependencies{
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
-   Copyright 2017 xiansenLiu
+   Copyright 2018 dashMrl
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

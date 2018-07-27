@@ -1,4 +1,4 @@
-package com.xiansenliu.sloth
+package com.dashmrl.sloth
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.support.v4.app.ActivityCompat
+import android.support.v4.app.Fragment
 
 /**
  * Author       xinliu
@@ -46,7 +47,7 @@ private fun isPermissionGranted(context: Context, permission: String): Boolean {
 }
 
 @SuppressLint("NewApi")
-internal fun shouldShowRationale(fragment: android.app.Fragment, permissions: List<String>): List<String> {
+internal fun shouldShowRationale(fragment: Fragment, permissions: List<String>): List<String> {
     val unGrantedPermissions = ArrayList<String>()
     for (permission in permissions) {
         val should = fragment.shouldShowRequestPermissionRationale(permission)
