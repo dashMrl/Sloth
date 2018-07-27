@@ -48,7 +48,7 @@ allprojects {
 - Step 2. Add the dependency
 ```groovy
 dependencies{
-    implementation "com.github.dashMrl:Sloth:v1.0.5"
+    implementation "com.github.dashMrl:Sloth:v1.0.6"
 }
 ```
 
