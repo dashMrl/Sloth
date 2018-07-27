@@ -1,7 +1,7 @@
 apply plugin: 'com.github.dcendents.android-maven'
 
 version = rootProject.android.versionName
-group = "com.github.xiansenLiu"
+group = "com.github.dashMrl"
 
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
